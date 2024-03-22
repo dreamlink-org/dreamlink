@@ -27,7 +27,6 @@ import dreamlink.menu.component.core.window.WindowComponent;
 import dreamlink.simulation.Simulation;
 import dreamlink.simulation.SimulationMode;
 import dreamlink.utility.maths.Vector4fMaths;
-import dreamlink.window.Window;
 
 public class HomeExploreLoadZoneComponent extends WrapperComponent {
 
@@ -36,7 +35,6 @@ public class HomeExploreLoadZoneComponent extends WrapperComponent {
     private static int itemSpacing = 5;
     private static int logHistorySize = 1000;
 
-    private static String quitButtonText = "Quit";
     private static String backButtonText = "Back";
     private static Vector2i buttonDimensions = new Vector2i(160, 24);
 
@@ -63,35 +61,18 @@ public class HomeExploreLoadZoneComponent extends WrapperComponent {
                         )
                     )
                     .addComponent(
-                        new SpanComponent(SpanOrientation.horizontal, SpanAlignment.center, HomeExploreLoadZoneComponent.itemSpacing)
-                            .addComponent(
-                                new ButtonComponent(
-                                    new StaticButtonComponentProvider(this::back),
-                                    new BoxComponent(
-                                        new TextLineLabelComponent(
-                                            HomeExploreLoadZoneComponent.backButtonText,
-                                            FontDecoration.normal,
-                                            Vector4fMaths.black
-                                        ),
-                                        BoxDimension.fixed(HomeExploreLoadZoneComponent.buttonDimensions.x),
-                                        BoxDimension.fixed(HomeExploreLoadZoneComponent.buttonDimensions.y)
-                                    )
-                                )
+                        new ButtonComponent(
+                            new StaticButtonComponentProvider(this::back),
+                            new BoxComponent(
+                                new TextLineLabelComponent(
+                                    HomeExploreLoadZoneComponent.backButtonText,
+                                    FontDecoration.normal,
+                                    Vector4fMaths.black
+                                ),
+                                BoxDimension.fixed(HomeExploreLoadZoneComponent.buttonDimensions.x),
+                                BoxDimension.fixed(HomeExploreLoadZoneComponent.buttonDimensions.y)
                             )
-                            .addComponent(
-                                new ButtonComponent(
-                                    new StaticButtonComponentProvider(Window.instance::setShouldClose),
-                                    new BoxComponent(
-                                        new TextLineLabelComponent(
-                                            HomeExploreLoadZoneComponent.quitButtonText,
-                                            FontDecoration.normal,
-                                            Vector4fMaths.black
-                                        ),
-                                        BoxDimension.fixed(HomeExploreLoadZoneComponent.buttonDimensions.x),
-                                        BoxDimension.fixed(HomeExploreLoadZoneComponent.buttonDimensions.y)
-                                    )
-                                )
-                            )
+                        )
                     ),
                 HomeExploreLoadZoneComponent.itemSpacing
             )
