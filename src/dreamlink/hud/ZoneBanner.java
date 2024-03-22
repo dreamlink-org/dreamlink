@@ -10,6 +10,7 @@ import dreamlink.graphics.sprite.SpriteHeight;
 import dreamlink.graphics.text.CharacterTextureSampleLookup;
 import dreamlink.graphics.text.FontDecoration;
 import dreamlink.graphics.texture.sample.OverlayTextureSample;
+import dreamlink.logger.Logger;
 import dreamlink.player.Player;
 import dreamlink.simulation.Simulation;
 import dreamlink.utility.maths.Vector4fMaths;
@@ -28,6 +29,7 @@ public class ZoneBanner implements IHUDComponent {
     }
 
     public void setup() {
+        Logger.instance.debug("Setting up zone banner HUD element");
         HUDSystem.instance.addHUDComponent(this);
     }
 

@@ -7,6 +7,7 @@ import dreamlink.gamestate.simulation.SimulationLogViewerMenuGameState;
 import dreamlink.graphics.sprite.SpriteBatch;
 import dreamlink.graphics.text.FontDecoration;
 import dreamlink.graphics.texture.sample.OverlayTextureSample;
+import dreamlink.logger.Logger;
 import dreamlink.menu.MenuSystem;
 import dreamlink.menu.component.LogViewerComponent;
 import dreamlink.menu.component.core.BaseMenuComponent;
@@ -86,6 +87,7 @@ public class SimulationLogViewerComponent extends WrapperComponent {
     }
 
     public void setup() {
+        Logger.instance.debug("Setting up SimulationLogViewerComponent");
         MenuSystem.instance.addMenuComponent(this);
         this.logViewerComponent.setup();
     }

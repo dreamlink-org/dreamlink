@@ -8,6 +8,7 @@ import dreamlink.gamestate.simulation.SimulationGameState;
 import dreamlink.graphics.sprite.SpriteBatch;
 import dreamlink.graphics.sprite.SpriteHeight;
 import dreamlink.graphics.texture.sample.OverlayTextureSample;
+import dreamlink.logger.Logger;
 import dreamlink.player.Player;
 import dreamlink.simulation.Simulation;
 
@@ -16,6 +17,7 @@ public class Reticule implements IHUDComponent {
     public static Reticule instance = new Reticule();
 
     public void setup() {
+        Logger.instance.debug("Setting up reticule HUD element");
         HUDSystem.instance.addHUDComponent(this);
     }
 

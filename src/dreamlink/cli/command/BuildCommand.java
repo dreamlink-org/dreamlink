@@ -33,12 +33,12 @@ public class BuildCommand implements ICommand {
 
         // Load the zone data - this will run all the standard zone validation checks
         // and ensure that the zone is in a valid state before publishing...
-        Logger.instance.info(String.format("Validating zone: %s", directoryPath));
+        Logger.instance.info(String.format("Loading zone (for validation): %s", directoryPath));
         Simulation.instance.simulationMode = SimulationMode.edit;
         Simulation.instance.zoneSourceStrategy = LocalZoneSourceStrategy.instance;
         ZoneCache.instance.getZone(directoryPath.toString()).loadData();
 
-        Logger.instance.info(String.format("Writing zone to: %s", outputPath));
+        Logger.instance.debug(String.format("Writing zone to: %s", outputPath));
         FileFns.compressIntoZip(directoryPath.toFile(), outputPath.toFile());
     }
 

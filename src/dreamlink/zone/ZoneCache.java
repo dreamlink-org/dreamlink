@@ -35,6 +35,7 @@ public class ZoneCache {
 
     public void clear() {
         for(var zone : this.zoneLookup.values()) {
+            Logger.instance.debug(String.format("Retiring zone: %s", zone));
             this.retiredZones.add(zone);
         }
         this.accessList.clear();
@@ -45,11 +46,11 @@ public class ZoneCache {
         return this.getZone(zoneKey, false);
     }
 
-    public Zone getZone(String zoneKey, boolean isShadowCopy) {
-        var cacheKey = new ZoneCacheKey(zoneKey, isShadowCopy);
+    public Zone getZone(String name, boolean isShadowCopy) {
+        var cacheKey = new ZoneCacheKey(name, isShadowCopy);
         if(!this.zoneLookup.containsKey(cacheKey)) {
-            Logger.instance.info(String.format("In-memory cache miss: %s", zoneKey));
-            var zone = new Zone(this, zoneKey, isShadowCopy);
+            Logger.instance.debug(String.format("Creating new zone: %s", name));
+            var zone = new Zone(this, name, isShadowCopy);
             this.allZones.add(zone);
             this.zoneLookup.put(cacheKey, zone);
 
@@ -70,6 +71,7 @@ public class ZoneCache {
 
             // Removed zones should be placed in the retired queue, so that they
             // can be properly cleaned up.
+            Logger.instance.debug(String.format("Retiring zone: %s", lastZone));
             this.retiredZones.add(lastZone);
         }
 

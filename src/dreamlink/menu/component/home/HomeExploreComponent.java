@@ -7,6 +7,7 @@ import dreamlink.gamestate.home.HomeLoadZoneGameState;
 import dreamlink.graphics.sprite.SpriteBatch;
 import dreamlink.graphics.text.FontDecoration;
 import dreamlink.graphics.texture.sample.OverlayTextureSample;
+import dreamlink.logger.Logger;
 import dreamlink.menu.MenuSystem;
 import dreamlink.menu.component.core.BaseMenuComponent;
 import dreamlink.menu.component.core.PaddingComponent;
@@ -183,6 +184,7 @@ public class HomeExploreComponent extends WrapperComponent {
     }
 
     public void setup() {
+        Logger.instance.debug("Setting up HomeExploreComponent");
         MenuSystem.instance.addMenuComponent(this);
     }
 

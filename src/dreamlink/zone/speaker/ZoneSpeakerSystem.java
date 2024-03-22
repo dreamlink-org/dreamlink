@@ -75,7 +75,7 @@ public class ZoneSpeakerSystem {
 
             var speakerName = fileName.substring(0, fileName.length() - ZoneSpeakerSystem.speakerConfigSuffix.length());
             var speakerConfig = FileFns.readJSONFromFile(file);
-            Logger.instance.info(String.format("Loading speaker config: %s", fileName));
+            Logger.instance.debug(String.format("Loading speaker config: %s", fileName));
 
             var textureSampleName = speakerConfig.optString("texture.sample", null);
             var textureSample = this.directory.getTextureSystem().getTextureSample(textureSampleName);
@@ -105,7 +105,7 @@ public class ZoneSpeakerSystem {
                 textureSample
             );
 
-            Logger.instance.info(String.format("Registering speaker: %s with sound: %s", speaker, soundBufferRef));
+            Logger.instance.debug(String.format("Registering speaker: %s with sound: %s", speaker, soundBufferRef));
             this.speakers.add(speaker);
             this.speakerLookup.put(speaker.name, speaker);
         }
@@ -118,7 +118,7 @@ public class ZoneSpeakerSystem {
             return;
         }
 
-        Logger.instance.info(String.format("Loading generated speaker config: %s", generatedSpeakerConfigFile.getName()));
+        Logger.instance.debug(String.format("Loading generated speaker config: %s", generatedSpeakerConfigFile.getName()));
         var generatedSpeakersConfig = FileFns.readJSONFromFile(generatedSpeakerConfigFile); 
         for(var speakerName : generatedSpeakersConfig.keySet()) {
             var generatedSpeakerConfig = generatedSpeakersConfig.getJSONObject(speakerName);
@@ -161,7 +161,7 @@ public class ZoneSpeakerSystem {
 
     public void destroy() {
         for(var speaker : this.speakers) {
-            Logger.instance.info(String.format("Destroying speaker: %s", speaker));
+            Logger.instance.debug(String.format("Destroying speaker: %s", speaker));
             speaker.destroy();
         }
     }

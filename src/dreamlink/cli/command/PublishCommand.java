@@ -43,16 +43,17 @@ public class PublishCommand implements ICommand {
 
                 // Load the zone data - this will run all the standard zone validation checks
                 // and ensure that the zone is in a valid state before publishing...
-                Logger.instance.info("Validating zone data...");
+                Logger.instance.info(String.format("Loading zone (for validation): %s", directoryPath));
                 Simulation.instance.simulationMode = SimulationMode.edit;
                 Simulation.instance.zoneSourceStrategy = LocalZoneSourceStrategy.instance;
                 ZoneCache.instance.getZone(directoryPath.toString()).loadData();
 
-                Logger.instance.info(String.format("Building zone: %s", directoryPath));
+                Logger.instance.info("Building zone");
                 FileFns.compressIntoZip(directoryPath.toFile(), tempFile);
                 var bytes = FileFns.readBytesFromFile(tempFile);
 
 
+                Logger.instance.info("Uploading zone");
                 var connection = (HttpURLConnection)uploadURL.openConnection();
                 connection.setDoOutput(true);
                 connection.setRequestMethod("POST");

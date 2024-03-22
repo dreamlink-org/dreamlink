@@ -26,6 +26,10 @@ public class Logger {
         }
     }
 
+    public void debug(String message) {
+        this.log(LogLevel.debug, message);
+    }
+
     public void info(String message) {
         this.log(LogLevel.info, message);
     }

@@ -6,6 +6,7 @@ import java.util.List;
 import org.lwjgl.opengl.GL42;
 
 import dreamlink.graphics.mesh.vertexbuffer.IMeshBuffer;
+import dreamlink.logger.Logger;
 
 public abstract class Mesh {
 
@@ -34,6 +35,7 @@ public abstract class Mesh {
     }
 
     public void setup() {
+        Logger.instance.debug(String.format("Setting up mesh: %s", this));
         this.vertexArrayID = GL42.glGenVertexArrays();
         var previouslyBoundMesh = Mesh.getCurrentlyBoundMesh();
         this.bind();
@@ -91,6 +93,7 @@ public abstract class Mesh {
     }
 
     public void destroy() {
+        Logger.instance.debug(String.format("Destroying mesh: %s", this));
         var previouslyBoundMesh = Mesh.getCurrentlyBoundMesh();
         this.bind();
 
@@ -105,7 +108,12 @@ public abstract class Mesh {
         } else {
             Mesh.unbind();
         }
+    }
 
+    @Override
+    public String toString() {
+        var hash = Integer.toHexString(this.hashCode());
+        return String.format("Mesh(%s)", hash);
     }
     
 }

@@ -7,10 +7,6 @@ public class TransparentRevealTexture extends Texture {
 
     public static TransparentRevealTexture instance = new TransparentRevealTexture();
 
-    public TransparentRevealTexture() {
-        super();
-    }
-
     @Override
     public void setup() {
         super.setup();

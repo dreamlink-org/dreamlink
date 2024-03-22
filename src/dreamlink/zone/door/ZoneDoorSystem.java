@@ -91,7 +91,7 @@ public class ZoneDoorSystem {
 
             var doorName = fileName.substring(0, fileName.length() - ZoneDoorSystem.doorConfigSuffix.length());
 
-            Logger.instance.info(String.format("Loading door config: %s", fileName));
+            Logger.instance.debug(String.format("Loading door config: %s", fileName));
             var doorConfig = FileFns.readJSONFromFile(file);
             var textureEntryTopName = doorConfig.optString("texture.sample.top", null);
             var textureEntryTop = textureEntryTopName == null
@@ -131,7 +131,7 @@ public class ZoneDoorSystem {
             .toFile();
 
         if(dynamicDoorConfigFile.exists()) {
-            Logger.instance.info(String.format("Loading generated door config: %s", dynamicDoorConfigFile.getName()));
+            Logger.instance.debug(String.format("Loading generated door config: %s", dynamicDoorConfigFile.getName()));
             var generatedDoorsConfig = FileFns.readJSONFromFile(dynamicDoorConfigFile);
             for(var doorName : generatedDoorsConfig.keySet()) {
                 var generatedDoorConfig = generatedDoorsConfig.getJSONObject(doorName);

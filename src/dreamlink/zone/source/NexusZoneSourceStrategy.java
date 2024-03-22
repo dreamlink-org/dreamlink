@@ -49,7 +49,7 @@ public class NexusZoneSourceStrategy implements IZoneSourceStrategy {
                 var inputStream = zoneURI.toURL().openStream();
                 var outputStream = new FileOutputStream(tempFile);
             ) {
-                Logger.instance.info(String.format("Downloading zone: %s", zoneURI));
+                Logger.instance.debug(String.format("Downloading zone: %s", zoneURI));
                 inputStream.transferTo(outputStream);
                 FileFns.extractZip(tempFile, tempDirPath.toFile());
                 return new InternalZoneData(tempDirPath);

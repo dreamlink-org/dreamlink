@@ -8,6 +8,7 @@ import dreamlink.gamestate.simulation.SimulationGameState;
 import dreamlink.gamestate.simulation.SimulationMenuGameState;
 import dreamlink.graphics.sprite.SpriteBatch;
 import dreamlink.graphics.text.FontDecoration;
+import dreamlink.logger.Logger;
 import dreamlink.menu.MenuSystem;
 import dreamlink.menu.component.core.BaseMenuComponent;
 import dreamlink.menu.component.core.PaddingComponent;
@@ -195,6 +196,7 @@ public class QuickBarComponent extends WrapperComponent {
     }
 
     public void setup() {
+        Logger.instance.debug("Setting up QuickBarComponent");
         MenuSystem.instance.addMenuComponent(this);
     }
 

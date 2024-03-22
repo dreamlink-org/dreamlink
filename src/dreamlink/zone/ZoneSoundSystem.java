@@ -43,12 +43,11 @@ public class ZoneSoundSystem {
                 continue;
             }
 
-            Logger.instance.info(String.format("Loading sound: %s", fileName));
+            Logger.instance.debug(String.format("Loading sound: %s", fileName));
             var soundBytes = FileFns.readBytesFromFile(soundFile);
             var soundData = SoundData.fromBytes(soundBytes);
             var hash = HashFns.generateHash(soundBytes);
 
-            Logger.instance.info(String.format("Requesting reference to sound"));
             var soundBufferRef = SoundBufferCache.instance.getSoundBufferRef(
                 hash,
                 soundData
@@ -60,14 +59,12 @@ public class ZoneSoundSystem {
 
     public void setup() {
         for(var soundBufferRef : this.soundBufferRefLookup.values()) {
-            Logger.instance.info(String.format("Attempting to setup sound: %s", soundBufferRef));
             soundBufferRef.setup();
         }
     }
 
     public void destroy() {
         for(var soundBufferRef : this.soundBufferRefLookup.values()) {
-            Logger.instance.info(String.format("Releasing reference to sound: %s", soundBufferRef));
             soundBufferRef.release();
         }
     }

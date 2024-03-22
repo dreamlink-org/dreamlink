@@ -3,6 +3,7 @@ package dreamlink.graphics.framebuffer;
 import org.lwjgl.opengl.GL42;
 
 import dreamlink.Config;
+import dreamlink.logger.Logger;
 
 public class DepthBuffer {
 
@@ -12,6 +13,7 @@ public class DepthBuffer {
     public int depthBufferID;
 
     public void setup() {
+        Logger.instance.debug(String.format("Setting up depth buffer: %s", this));
         var resolution = Config.instance.resolution;
         this.depthBufferID = GL42.glGenRenderbuffers();
         GL42.glBindRenderbuffer(GL42.GL_RENDERBUFFER, this.depthBufferID);
@@ -25,6 +27,12 @@ public class DepthBuffer {
 
     public void delete() {
         GL42.glDeleteRenderbuffers(this.depthBufferID);
+    }
+
+    @Override
+    public String toString() {
+        var hash = Integer.toHexString(this.hashCode());
+        return String.format("DepthBuffer(%s)", hash);
     }
     
 }

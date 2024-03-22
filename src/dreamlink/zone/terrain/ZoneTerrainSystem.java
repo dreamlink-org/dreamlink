@@ -79,7 +79,7 @@ public class ZoneTerrainSystem {
         var doorSystem = this.directory.getDoorSystem();
         var speakerSystem = this.directory.getSpeakerSystem();
 
-        Logger.instance.info(String.format("Loading terrain data: %s", terrainFile.getName()));
+        Logger.instance.debug(String.format("Loading terrain data: %s", terrainFile.getName()));
         try(
             var fileInputStream = new FileInputStream(terrainFile);
             var bufferedInputStream = new BufferedInputStream(fileInputStream);
@@ -223,7 +223,7 @@ public class ZoneTerrainSystem {
 
     public void destroy() {
         if(this.chunks != null) {
-            Logger.instance.info("Destroying terrain chunks");
+            Logger.instance.debug("Destroying terrain chunks");
             for(var chunk : this.chunks) {
                 chunk.destroy();
             }

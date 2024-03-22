@@ -36,7 +36,7 @@ public class Entry {
                 }
 
                 var msg = String.format("Running command: %s", command.getCommandName());
-                Logger.instance.info(msg);
+                Logger.instance.debug(msg);
                 command.run(parsedArgs);
             }
 

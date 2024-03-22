@@ -9,6 +9,7 @@ import dreamlink.graphics.sprite.SpriteBatch;
 import dreamlink.graphics.sprite.SpriteHeight;
 import dreamlink.graphics.sprite.template.SolidSpriteTemplate;
 import dreamlink.graphics.texture.sample.EntityTextureSample;
+import dreamlink.logger.Logger;
 import dreamlink.simulation.Simulation;
 import dreamlink.utility.maths.Vector2iMaths;
 import dreamlink.utility.maths.Vector4fMaths;
@@ -31,6 +32,7 @@ public class Logo implements IHUDComponent {
     }
 
     public void setup() {
+        Logger.instance.debug("Setting up logo HUD element");
         HUDSystem.instance.addHUDComponent(this);
     }
 

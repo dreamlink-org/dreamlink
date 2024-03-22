@@ -11,6 +11,7 @@ import java.util.Queue;
 import dreamlink.Config;
 import dreamlink.audio.SoundSource;
 import dreamlink.audio.buffer.SoundBuffer;
+import dreamlink.logger.Logger;
 
 public class SoundMixer {
 
@@ -79,6 +80,7 @@ public class SoundMixer {
     }
 
     public void setup() {
+        Logger.instance.debug("Setting up sound mixer");
         for(var soundSource : this.allSoundSources) {
             soundSource.setup();
         }

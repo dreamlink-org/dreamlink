@@ -7,10 +7,6 @@ public class PortalTexture extends Texture {
 
     public static PortalTexture instance = new PortalTexture();
 
-    public PortalTexture() {
-        super();
-    }
-
     @Override
     public void setup() {
         super.setup();

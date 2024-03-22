@@ -91,7 +91,7 @@ public class ZoneBlockSystem {
                 fileName.length() - ZoneBlockSystem.blockConfigSuffix.length()
             );
 
-            Logger.instance.info(String.format("Loading block config: %s", fileName));
+            Logger.instance.debug(String.format("Loading block config: %s", fileName));
             var blockConfig = FileFns.readJSONFromFile(file);
 
             var lightLevel = FloatMaths.clamp(blockConfig.optFloat("lighting.amount", ZoneBlockSystem.defaultLightingAmount), 0f, 1f);

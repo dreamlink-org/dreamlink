@@ -44,7 +44,7 @@ public class ZoneGlobalConfigSystem {
             .resolve(ZoneGlobalConfigSystem.skyBoxPath)
             .toFile();
 
-        Logger.instance.info(String.format("Loading global config: %s", configFile.getName()));
+        Logger.instance.debug(String.format("Loading global config: %s", configFile.getName()));
         var config = FileFns.readJSONFromFile(configFile);
 
         var chunkSpaceDimensionsArray = config.getJSONArray("terrain.dimensions.chunk_space");

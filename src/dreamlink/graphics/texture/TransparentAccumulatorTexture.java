@@ -7,10 +7,6 @@ public class TransparentAccumulatorTexture extends Texture {
 
     public static TransparentAccumulatorTexture instance = new TransparentAccumulatorTexture();
 
-    public TransparentAccumulatorTexture() {
-        super();
-    }
-
     @Override
     public void setup() {
         super.setup();

@@ -6,6 +6,7 @@ import java.util.List;
 import org.lwjgl.opengl.GL42;
 
 import dreamlink.graphics.glstate.FrameBufferState;
+import dreamlink.logger.Logger;
 
 public class FrameBuffer {
 
@@ -22,6 +23,7 @@ public class FrameBuffer {
         this.colorAttachments.add(colorAttachment);
     }
     public void setup() {
+        Logger.instance.debug(String.format("Setting up frame buffer: %s", this));
         this.frameBufferID = GL42.glGenFramebuffers();
 
         try(var frameBufferState = new FrameBufferState()) {
@@ -43,6 +45,12 @@ public class FrameBuffer {
 
             GL42.glDrawBuffers(drawBuffers);
         } 
+    }
+
+    @Override
+    public String toString() {
+        var hash = Integer.toHexString(this.hashCode());
+        return String.format("FrameBuffer(%s)", hash);
     }
 
 }

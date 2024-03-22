@@ -11,6 +11,7 @@ import dreamlink.audio.SoundData;
 import dreamlink.audio.buffer.emitter.SoundEmitter;
 import dreamlink.audio.mixer.ISoundMixerMembership;
 import dreamlink.audio.mixer.SoundMixer;
+import dreamlink.logger.Logger;
 
 public class SoundBuffer {
 
@@ -67,6 +68,7 @@ public class SoundBuffer {
     }
 
     public void bufferData(SoundData soundData) {
+        Logger.instance.debug(String.format("Buffering data to sound buffer: %s", this));
         this.sampleRate = soundData.sampleRate;
         this.capacity = soundData.pcmData.length;
         this.duration = soundData.pcmData.length / soundData.sampleRate;
@@ -86,8 +88,15 @@ public class SoundBuffer {
     }
 
     public void destroy() {
+        Logger.instance.debug(String.format("Destroying sound buffer: %s", this));
         this.membership.unregister();
         AL10.alDeleteBuffers(this.soundBufferID);
+    }
+
+    @Override
+    public String toString() {
+        var hash = Integer.toHexString(this.hashCode());
+        return String.format("SoundBuffer(%s)", hash);
     }
     
 }

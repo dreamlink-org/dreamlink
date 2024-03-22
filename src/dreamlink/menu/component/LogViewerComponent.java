@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dreamlink.logger.LogMessage;
+import dreamlink.logger.Logger;
 import dreamlink.logger.simulation.SynchronizedLogRelay;
 import dreamlink.menu.component.core.BaseMenuComponent;
 import dreamlink.menu.component.core.WrapperComponent;
@@ -54,6 +55,7 @@ public class LogViewerComponent extends WrapperComponent {
     }
 
     public void setup() {
+        Logger.instance.debug(String.format("Setting up LogViewerComponent: %s", this));
         SynchronizedLogRelay.instance.addListener(this::onLogMessage);
     }
 
@@ -71,6 +73,12 @@ public class LogViewerComponent extends WrapperComponent {
     @Override
     public BaseMenuComponent getComponent() {
         return this.component;
+    }
+
+    @Override
+    public String toString() {
+        var hash = Integer.toHexString(this.hashCode());
+        return String.format("LogViewerComponent(%s)", hash);
     }
     
 }

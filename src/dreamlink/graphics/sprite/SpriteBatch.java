@@ -11,6 +11,7 @@ import org.joml.Vector4f;
 
 import dreamlink.graphics.mesh.SpriteMesh;
 import dreamlink.graphics.texture.sample.TextureSample;
+import dreamlink.logger.Logger;
 
 public class SpriteBatch {
 
@@ -31,8 +32,8 @@ public class SpriteBatch {
             : SpriteBatch.unusedFragments.remove();
     }
 
-
     public void setup() {
+        Logger.instance.debug(String.format("Setting up sprite batch: %s", this));
         this.mesh.setup();
     }
 
@@ -77,8 +78,15 @@ public class SpriteBatch {
     }
 
     public void destroy() {
+        Logger.instance.debug(String.format("Destroying sprite batch: %s", this));
         this.clear();
         this.mesh.destroy();
+    }
+
+    @Override
+    public String toString() {
+        var hash = Integer.toHexString(this.hashCode());
+        return String.format("SpriteBatch(%s)", hash);
     }
 
 }

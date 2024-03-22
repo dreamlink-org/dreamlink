@@ -126,7 +126,7 @@ public class Zone {
         this.isShadowCopy = isShadowCopy;
 
         var zoneDirectory = new InternalZoneDirectory();
-        this.textureSystem = new ZoneTextureSystem();
+        this.textureSystem = new ZoneTextureSystem(zoneDirectory);
         this.soundSystem = new ZoneSoundSystem();
         this.globalConfigModule = new ZoneGlobalConfigSystem(zoneDirectory);
         this.blockSystem = new ZoneBlockSystem(zoneDirectory);
@@ -259,7 +259,7 @@ public class Zone {
 
             try {
                 this.loadTask.join();
-                Logger.instance.info("Zone successfully loaded.");
+                Logger.instance.debug("Zone successfully loaded.");
             } catch (Exception e) {
                 this.zoneStatus = ZoneStatus.failed;
                 return;
@@ -277,6 +277,7 @@ public class Zone {
     }
 
     public void destroy() {
+        Logger.instance.debug(String.format("Destroying zone: %s", this.name));
         this.globalConfigModule.destroy();
         this.speakerSystem.destroy();
         this.soundSystem.destroy();
@@ -385,5 +386,10 @@ public class Zone {
             CompositeShaderProgram.instance.bind();
             CompositeMesh.instance.render();
         }
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Zone(%s.%s)", this.name, this.isShadowCopy);
     }
 }

@@ -34,7 +34,7 @@ public class ZoneTextureSystem {
     public Texture texture;
     public RGBA8ImageTextureData textureData;
 
-    public ZoneTextureSystem() {
+    public ZoneTextureSystem(IZoneDirectory directory) {
         this.textureSampleLookup = new HashMap<>();
         this.texture = new Texture();
     }
@@ -48,7 +48,7 @@ public class ZoneTextureSystem {
             .resolve(ZoneTextureSystem.atlasPath)
             .toFile();
 
-        Logger.instance.info(String.format("Loading texture data from: %s", textureFile.getName()));
+        Logger.instance.debug(String.format("Loading texture data from: %s", textureFile.getName()));
         this.textureData = RGBA8ImageTextureData.fromFile(textureFile);
 
         var samplesDirectoryFile = zonePath
@@ -62,7 +62,7 @@ public class ZoneTextureSystem {
             }
             var sampleName = fileName.substring(0, fileName.length() - ZoneTextureSystem.sampleSuffix.length());
 
-            Logger.instance.info(String.format("Loading texture sample config: %s", fileName));
+            Logger.instance.debug(String.format("Loading texture sample config: %s", fileName));
             var sampleConfig = FileFns.readJSONFromFile(sampleFile);
             var positionJSON = sampleConfig.getJSONArray("lookup.position");
             var position = JSONFns.getVector2iFromJSON(new Vector2i(), positionJSON);
@@ -105,7 +105,6 @@ public class ZoneTextureSystem {
     }
 
     public void setup() {
-        Logger.instance.info("Setting up level texture");
         this.isSetup = true;
         this.texture.setup();
         this.texture.bufferData(this.textureData);
@@ -113,7 +112,6 @@ public class ZoneTextureSystem {
 
     public void destroy() {
         if(this.isSetup) {
-            Logger.instance.info("Destroying level texture");
             this.texture.destroy();
         }
     }

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import dreamlink.audio.SoundData;
+import dreamlink.logger.Logger;
 
 public class SoundBufferCache {
     
@@ -26,6 +27,9 @@ public class SoundBufferCache {
 
     public ISoundBufferRef getSoundBufferRef(String soundHash, SoundData soundData) {
         if(!this.soundBufferCache.containsKey(soundHash)) {
+            var hashPrefix = soundHash.substring(0, 6);
+            var msg = String.format("Creating new sound buffer for hash: %s", hashPrefix);
+            Logger.instance.debug(msg);
             this.soundBufferCache.put(
                 soundHash, 
                 new SoundBufferRefCounter(

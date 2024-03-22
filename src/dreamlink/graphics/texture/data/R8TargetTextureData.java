@@ -27,5 +27,5 @@ public class R8TargetTextureData implements ITextureData {
             (ByteBuffer)null
         );
     }
-    
+
 }

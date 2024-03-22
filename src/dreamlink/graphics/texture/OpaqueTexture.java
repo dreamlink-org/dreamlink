@@ -7,10 +7,6 @@ public class OpaqueTexture extends Texture {
 
     public static OpaqueTexture instance = new OpaqueTexture();
 
-    public OpaqueTexture() {
-        super();
-    }
-
     @Override
     public void setup() {
         super.setup();

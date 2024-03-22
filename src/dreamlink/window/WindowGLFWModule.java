@@ -44,7 +44,7 @@ public class WindowGLFWModule {
             this.windowDimensions.x,
             this.windowDimensions.y,
             WindowGLFWModule.windowTitle,
-            primaryMonitorID,
+            MemoryUtil.NULL,
             MemoryUtil.NULL
         );
 

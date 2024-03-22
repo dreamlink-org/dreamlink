@@ -8,6 +8,7 @@ import org.lwjgl.opengl.GL42;
 import dreamlink.graphics.program.shader.ProgramShaderModule;
 import dreamlink.graphics.program.shader.ShaderType;
 import dreamlink.graphics.program.uniform.ShaderUniform;
+import dreamlink.logger.Logger;
 
 public abstract class ShaderProgram {
 
@@ -38,6 +39,7 @@ public abstract class ShaderProgram {
     }
 
     public void setup() {
+        Logger.instance.debug(String.format("Setting up shader program: %s", this));
         this.programID = GL42.glCreateProgram();
 
         this.vertexShader.loadShaderCode();
@@ -59,10 +61,10 @@ public abstract class ShaderProgram {
         ShaderProgram.currentlyBoundShaderProgram = this;
     }
 
-    public void delete() {
-        this.vertexShader.delete();
-        this.fragmentShader.delete();
-        GL42.glDeleteProgram(this.programID);
+    @Override
+    public String toString() {
+        var hash = Integer.toHexString(this.hashCode());
+        return String.format("ShaderProgram(%s)", hash);
     }
     
 }

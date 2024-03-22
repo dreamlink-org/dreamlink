@@ -18,6 +18,7 @@ import dreamlink.graphics.sprite.SpriteBatch;
 import dreamlink.graphics.texture.EntityTexture;
 import dreamlink.graphics.texture.OverlayTexture;
 import dreamlink.graphics.texture.Texture;
+import dreamlink.logger.Logger;
 import dreamlink.menu.component.core.BaseMenuComponent;
 import dreamlink.menu.event.ClickEvent;
 import dreamlink.menu.event.DragEndEvent;
@@ -54,6 +55,7 @@ public class MenuSystem {
     }
 
     public void setup() {
+        Logger.instance.debug("Setting up menu system");
         this.spriteBatch.setup();
     }
 
