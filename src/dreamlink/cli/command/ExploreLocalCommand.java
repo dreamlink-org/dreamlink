@@ -4,7 +4,7 @@ import dreamlink.gamestate.home.HomeExploreLogoGameState;
 import dreamlink.simulation.Simulation;
 import dreamlink.simulation.SimulationMode;
 import dreamlink.utility.PathFns;
-import dreamlink.zone.source.LocalZoneSourceStrategy;
+import dreamlink.zone.source.LocalMockNexusZoneSourceStrategy;
 import net.sourceforge.argparse4j.inf.Namespace;
 import net.sourceforge.argparse4j.inf.Subparser;
 
@@ -21,18 +21,22 @@ public class ExploreLocalCommand implements ICommand {
     @Override
     public void setupParser(Subparser subparser) {
         subparser.addArgument(ExploreLocalCommand.rootArg)
-            .nargs("?")
+            .nargs("+")
             .setDefault("")
             .type(String.class);
     }
 
     @Override
     public void run(Namespace namespace) {
-        var rootPathStr = namespace.getString(ExploreLocalCommand.rootArg);
-        var rootPath = PathFns.sanitizeUserPath(rootPathStr);
+        var strategy = new LocalMockNexusZoneSourceStrategy();
+        var rootStrings = namespace.getList(ExploreLocalCommand.rootArg);
+        for(var rootString : rootStrings) {
+            var rootPath = PathFns.sanitizeUserPath((String)rootString);
+            strategy.scanDirectory(rootPath.toFile());
+        }
 
         Simulation.instance.simulationMode = SimulationMode.explore;
-        Simulation.instance.zoneSourceStrategy = new LocalZoneSourceStrategy(rootPath);
+        Simulation.instance.zoneSourceStrategy = strategy;
         Simulation.instance.setGameState(HomeExploreLogoGameState.instance);
 
         try {

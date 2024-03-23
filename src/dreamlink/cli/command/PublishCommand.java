@@ -18,7 +18,7 @@ import net.sourceforge.argparse4j.inf.Subparser;
 public class PublishCommand implements ICommand {
 
     private static String commandName = "publish";
-    private static String zoneNameKey = "meta.name";
+    private static String zoneNameKey = "meta.nexusid";
     private static String directoryArg = "directory";
     private static String dreamCodeHeader = "X-Nexus-Auth";
 
