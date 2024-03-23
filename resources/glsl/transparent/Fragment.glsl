@@ -1,4 +1,4 @@
-#version 450
+#version 410
 
 struct TextureMetaData {
     int texture_unit_id;
@@ -42,7 +42,7 @@ vec4 sample_from_offset(vec2 offset, int unit) {
         default:
             return vec4(1.0, 0.0, 0.0, 1.0);
     }
-};
+}
 
 void main() {
     float total_light = base_light;
@@ -67,4 +67,4 @@ void main() {
 
     transparency_accumulator = vec4(color.rgb * color.a, color.a) * weight;
     transparency_reveal = color.a;
-};
+}

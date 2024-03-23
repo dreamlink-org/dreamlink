@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.joml.Vector2i;
 
-import dreamlink.Config;
 import dreamlink.window.Window;
 import dreamlink.window.button.Button;
 import dreamlink.zone.ZoneStatus;
@@ -61,7 +60,7 @@ public class MenuSystem {
 
     public void addMenuComponent(BaseMenuComponent rootComponent) {
         rootComponent.computeInitialDimensions();
-        rootComponent.computeDimensions(Config.instance.resolution);
+        rootComponent.computeDimensions(Window.instance.getResolution());
         rootComponent.finalizeLayout(null, Vector2iMaths.zero);
         this.rootComponents.add(rootComponent);
     }

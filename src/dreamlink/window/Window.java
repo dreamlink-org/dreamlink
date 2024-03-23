@@ -29,6 +29,10 @@ public class Window {
         return this.glfwModule;
     }
 
+    public Vector2i getResolution() {
+        return this.glfwModule.getResolution();
+    }
+
     public long getWindowID() {
         return this.glfwModule.windowID;
     }

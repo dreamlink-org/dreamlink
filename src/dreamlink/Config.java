@@ -33,6 +33,7 @@ public class Config {
     public Button editButton;
     public Button mainMenuButton;
     public float mouseSensitivity;
+    public boolean borderlessWindowedMode;
     public URI nexusRoot;
     public String nexusDreamCode;
     public int maxAudioSources;
@@ -41,14 +42,9 @@ public class Config {
         var configFile = CommonPaths.instance.configPath.resolve("config.json").toFile();
         var config = FileFns.readJSONFromFile(configFile);
 
-        var resolutionArray = config.getJSONArray("display.resolution");
-        this.resolution = new Vector2i(
-            resolutionArray.getInt(0),
-            resolutionArray.getInt(1)
-        );
-
         this.nexusRoot = URI.create(config.optString("nexus.root", Config.defaultNexusRoot));
         this.nexusDreamCode = config.optString("nexus.dreamcode").replace("-", "");
+        this.borderlessWindowedMode = config.optBoolean("display.borderless_windowed_mode", false);
 
         this.numThreads = config.optInt(
             "system.num_threads", 

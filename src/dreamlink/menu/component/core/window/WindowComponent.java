@@ -2,7 +2,6 @@ package dreamlink.menu.component.core.window;
 
 import org.joml.Vector2i;
 
-import dreamlink.Config;
 import dreamlink.graphics.sprite.template.ISpriteTemplate;
 import dreamlink.menu.component.core.BaseMenuComponent;
 import dreamlink.menu.component.core.WrapperComponent;
@@ -10,6 +9,7 @@ import dreamlink.menu.component.core.border.WindowBorderComponent;
 import dreamlink.menu.component.core.span.SpanAlignment;
 import dreamlink.menu.component.core.span.SpanComponent;
 import dreamlink.menu.component.core.span.SpanOrientation;
+import dreamlink.window.Window;
 
 public class WindowComponent extends WrapperComponent {
 
@@ -41,7 +41,7 @@ public class WindowComponent extends WrapperComponent {
 
     @Override
     public void finalizeLayout(BaseMenuComponent parent, Vector2i position) {
-        var resolution = Config.instance.resolution;
+        var resolution = Window.instance.getResolution();
         var dimensions = this.getDimensions();
         var windowPosition = new Vector2i(
             (resolution.x - dimensions.x) / 2,

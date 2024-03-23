@@ -3,7 +3,7 @@ package dreamlink.graphics.program.strategy.camera;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 
-import dreamlink.Config;
+import dreamlink.window.Window;
 
 public class CameraStrategy {
 
@@ -43,7 +43,7 @@ public class CameraStrategy {
     }
 
     private void setProjectionMatrix() {
-        var aspectRatio = (float)Config.instance.resolution.x / Config.instance.resolution.y;
+        var aspectRatio = (float)Window.instance.getResolution().x / Window.instance.getResolution().y;
         CameraStrategy.matrixBuffer
             .identity()
             .perspective(

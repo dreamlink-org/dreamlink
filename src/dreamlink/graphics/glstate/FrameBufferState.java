@@ -2,7 +2,6 @@ package dreamlink.graphics.glstate;
 
 import org.lwjgl.opengl.GL42;
 
-import dreamlink.Config;
 import dreamlink.graphics.framebuffer.FrameBuffer;
 import dreamlink.window.Window;
 
@@ -13,7 +12,7 @@ public class FrameBufferState implements AutoCloseable {
     private static void setFrameBuffer(FrameBuffer frameBuffer) {
         FrameBufferState.currentlyBoundFrameBuffer = frameBuffer;
         if(frameBuffer != null) {
-            var resolution = Config.instance.resolution;
+            var resolution = Window.instance.getResolution();
             GL42.glBindFramebuffer(GL42.GL_FRAMEBUFFER, frameBuffer.frameBufferID);
             GL42.glViewport(0, 0, resolution.x, resolution.y);
         } else {

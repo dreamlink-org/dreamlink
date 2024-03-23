@@ -1,4 +1,4 @@
-#version 450
+#version 410
 
 struct TextureMetaData {
     int texture_unit_id;
@@ -39,7 +39,7 @@ TextureMetaData unpack_texture_metadata(int packed_data) {
     texture_metadata.animation_start_frame = (packed_data >> 20) & 0xFF;
     texture_metadata.animation_speed = 0x10 - (packed_data >> 28) & 0xF;
     return texture_metadata;
-};
+}
 
 TerrainMetaData unpack_terrain_metadata(int packed_data) {
     TerrainMetaData terrain_metadata;
@@ -48,7 +48,7 @@ TerrainMetaData unpack_terrain_metadata(int packed_data) {
     terrain_metadata.is_hidden = (packed_data >> 8) & 0x1;
     terrain_metadata.is_affected_by_light = (packed_data >> 9) & 0x1;
     return terrain_metadata;
-};
+}
 
 void main() {
     vec4 world_position = model_matrix 
@@ -77,4 +77,4 @@ void main() {
     );
 
     gl_ClipDistance[0] = dot(world_position, clip);
-};
+}

@@ -1,7 +1,7 @@
 package dreamlink.graphics.texture;
 
-import dreamlink.Config;
 import dreamlink.graphics.texture.data.RGBA16TargetTextureData;
+import dreamlink.window.Window;
 
 public class TransparentAccumulatorTexture extends Texture {
 
@@ -11,7 +11,7 @@ public class TransparentAccumulatorTexture extends Texture {
     public void setup() {
         super.setup();
 
-        var resolution = Config.instance.resolution;
+        var resolution = Window.instance.getResolution();
         var textureData = new RGBA16TargetTextureData(resolution);
         this.bufferData(textureData);
     }

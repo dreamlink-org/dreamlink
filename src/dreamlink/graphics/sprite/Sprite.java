@@ -4,9 +4,9 @@ import org.joml.Vector2f;
 import org.joml.Vector2i;
 import org.joml.Vector4f;
 
-import dreamlink.Config;
 import dreamlink.graphics.mesh.SpriteMesh;
 import dreamlink.graphics.texture.sample.TextureSample;
+import dreamlink.window.Window;
 
 public class Sprite {
 
@@ -43,7 +43,7 @@ public class Sprite {
     }
 
     public void writeToMesh(SpriteMesh mesh) {
-        var resolution = Config.instance.resolution;
+        var resolution = Window.instance.getResolution();
         var invertedY = resolution.y - this.position.y - this.dimensions.y;
         var spritePosition = new Vector2f(
             (float)this.position.x / resolution.x * 2f - 1f,

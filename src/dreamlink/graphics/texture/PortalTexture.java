@@ -1,7 +1,7 @@
 package dreamlink.graphics.texture;
 
-import dreamlink.Config;
 import dreamlink.graphics.texture.data.RGBA8TargetTextureData;
+import dreamlink.window.Window;
 
 public class PortalTexture extends Texture {
 
@@ -11,7 +11,7 @@ public class PortalTexture extends Texture {
     public void setup() {
         super.setup();
 
-        var resolution = Config.instance.resolution;
+        var resolution = Window.instance.getResolution();
         var textureData = new RGBA8TargetTextureData(resolution);
         this.bufferData(textureData);
     }

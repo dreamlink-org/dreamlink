@@ -3,7 +3,6 @@ package dreamlink.hud;
 import org.joml.Vector2i;
 import org.joml.Vector4f;
 
-import dreamlink.Config;
 import dreamlink.gamestate.simulation.SimulationGameState;
 import dreamlink.graphics.sprite.SpriteBatch;
 import dreamlink.graphics.sprite.SpriteHeight;
@@ -14,6 +13,7 @@ import dreamlink.logger.Logger;
 import dreamlink.player.Player;
 import dreamlink.simulation.Simulation;
 import dreamlink.utility.maths.Vector4fMaths;
+import dreamlink.window.Window;
 import dreamlink.zone.ZoneStatus;
 
 public class ZoneBanner implements IHUDComponent {
@@ -25,7 +25,7 @@ public class ZoneBanner implements IHUDComponent {
     private int maxCharacters;
 
     public ZoneBanner() {
-        this.maxCharacters = Config.instance.resolution.x / OverlayTextureSample.glyphDimensions.x;
+        this.maxCharacters = Window.instance.getResolution().x / OverlayTextureSample.glyphDimensions.x;
     }
 
     public void setup() {
@@ -51,7 +51,7 @@ public class ZoneBanner implements IHUDComponent {
         }
 
         var bannerWidth = zoneTitle.length() * OverlayTextureSample.glyphDimensions.x;
-        var bannerPosition = new Vector2i((Config.instance.resolution.x - bannerWidth) / 2, 0);
+        var bannerPosition = new Vector2i((Window.instance.getResolution().x - bannerWidth) / 2, 0);
 
         var characterPosition = new Vector2i(bannerPosition);
         for(var ix = 0; ix < zoneTitle.length(); ix += 1) {

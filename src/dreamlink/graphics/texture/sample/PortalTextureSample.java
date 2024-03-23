@@ -1,7 +1,7 @@
 package dreamlink.graphics.texture.sample;
 
-import dreamlink.Config;
 import dreamlink.utility.maths.Vector2iMaths;
+import dreamlink.window.Window;
 
 public class PortalTextureSample extends TextureSample {
 
@@ -9,9 +9,9 @@ public class PortalTextureSample extends TextureSample {
 
     protected PortalTextureSample() {
         super(
-            Config.instance.resolution,
+            Window.instance.getResolution(),
             Vector2iMaths.zero,
-            Config.instance.resolution
+            Window.instance.getResolution()
         );
     }
     

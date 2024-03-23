@@ -3,7 +3,6 @@ package dreamlink.window;
 import org.joml.Vector2f;
 import org.joml.Vector2i;
 
-import dreamlink.Config;
 import dreamlink.simulation.Simulation;
 
 public class WindowMouseModule {
@@ -24,8 +23,8 @@ public class WindowMouseModule {
         glfwModule.getMousePosition(this.position);
 
         this.position.set(
-            (int)((float)this.position.x * Config.instance.resolution.x / glfwModule.windowDimensions.x),
-            (int)((float)this.position.y * Config.instance.resolution.y / glfwModule.windowDimensions.y)
+            (int)((float)this.position.x * Window.instance.getResolution().x / glfwModule.windowDimensions.x),
+            (int)((float)this.position.y * Window.instance.getResolution().y / glfwModule.windowDimensions.y)
         );
 
 
@@ -43,8 +42,8 @@ public class WindowMouseModule {
             glfwModule.setMousePosition(centeredPosition);
             if(this.isCentered) {
                 this.deltaPosition.set(
-                    (float)this.position.x / Config.instance.resolution.x - 0.5f,
-                    (float)this.position.y / Config.instance.resolution.y - 0.5f
+                    (float)this.position.x / Window.instance.getResolution().x - 0.5f,
+                    (float)this.position.y / Window.instance.getResolution().y - 0.5f
                 );
             }
             this.isCentered = true;

@@ -2,8 +2,8 @@ package dreamlink.graphics.framebuffer;
 
 import org.lwjgl.opengl.GL42;
 
-import dreamlink.Config;
 import dreamlink.logger.Logger;
+import dreamlink.window.Window;
 
 public class DepthBuffer {
 
@@ -14,7 +14,7 @@ public class DepthBuffer {
 
     public void setup() {
         Logger.instance.debug(String.format("Setting up depth buffer: %s", this));
-        var resolution = Config.instance.resolution;
+        var resolution = Window.instance.getResolution();
         this.depthBufferID = GL42.glGenRenderbuffers();
         GL42.glBindRenderbuffer(GL42.GL_RENDERBUFFER, this.depthBufferID);
         GL42.glRenderbufferStorage(

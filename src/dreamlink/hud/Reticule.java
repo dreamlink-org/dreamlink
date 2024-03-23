@@ -3,7 +3,6 @@ package dreamlink.hud;
 
 import org.joml.Vector2i;
 
-import dreamlink.Config;
 import dreamlink.gamestate.simulation.SimulationGameState;
 import dreamlink.graphics.sprite.SpriteBatch;
 import dreamlink.graphics.sprite.SpriteHeight;
@@ -11,6 +10,7 @@ import dreamlink.graphics.texture.sample.OverlayTextureSample;
 import dreamlink.logger.Logger;
 import dreamlink.player.Player;
 import dreamlink.simulation.Simulation;
+import dreamlink.window.Window;
 
 public class Reticule implements IHUDComponent {
 
@@ -33,8 +33,8 @@ public class Reticule implements IHUDComponent {
             : OverlayTextureSample.reticule;
 
         var reticulePosition = new Vector2i(
-            (Config.instance.resolution.x - reticuleSprite.dimensions.x) / 2,
-            (Config.instance.resolution.y - reticuleSprite.dimensions.y) / 2
+            (Window.instance.getResolution().x - reticuleSprite.dimensions.x) / 2,
+            (Window.instance.getResolution().y - reticuleSprite.dimensions.y) / 2
         );
 
         reticuleSprite.writeToSpriteBatch(

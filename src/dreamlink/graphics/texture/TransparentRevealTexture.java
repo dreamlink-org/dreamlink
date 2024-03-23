@@ -1,7 +1,7 @@
 package dreamlink.graphics.texture;
 
-import dreamlink.Config;
 import dreamlink.graphics.texture.data.R8TargetTextureData;
+import dreamlink.window.Window;
 
 public class TransparentRevealTexture extends Texture {
 
@@ -10,7 +10,7 @@ public class TransparentRevealTexture extends Texture {
     @Override
     public void setup() {
         super.setup();
-        var resolution = Config.instance.resolution;
+        var resolution = Window.instance.getResolution();
         var textureData = new R8TargetTextureData(resolution);
         this.bufferData(textureData);
     }

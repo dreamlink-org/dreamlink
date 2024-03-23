@@ -8,6 +8,8 @@ import org.lwjgl.glfw.GLFWKeyCallbackI;
 import org.lwjgl.glfw.GLFWMouseButtonCallbackI;
 import org.lwjgl.system.MemoryUtil;
 
+import dreamlink.Config;
+
 public class WindowGLFWModule {
 
     private static String windowTitle = "DreamLink";
@@ -31,6 +33,7 @@ public class WindowGLFWModule {
         GLFW.glfwWindowHint(GLFW.GLFW_MAXIMIZED, GLFW.GLFW_TRUE);
         GLFW.glfwWindowHint(GLFW.GLFW_RESIZABLE, GLFW.GLFW_TRUE);
         GLFW.glfwWindowHint(GLFW.GLFW_DECORATED, GLFW.GLFW_FALSE);
+        GLFW.glfwWindowHint(GLFW.GLFW_COCOA_RETINA_FRAMEBUFFER, GLFW.GLFW_FALSE);
 
         GLFW.glfwWindowHint(GLFW.GLFW_CONTEXT_VERSION_MAJOR, 4);
         GLFW.glfwWindowHint(GLFW.GLFW_CONTEXT_VERSION_MINOR, 0);
@@ -44,14 +47,25 @@ public class WindowGLFWModule {
             this.windowDimensions.x,
             this.windowDimensions.y,
             WindowGLFWModule.windowTitle,
-            MemoryUtil.NULL,
+            Config.instance.borderlessWindowedMode ? MemoryUtil.NULL : primaryMonitorID,
             MemoryUtil.NULL
         );
+
+        //get window size
+        var windowXBuffer = new int[1];
+        var windowYBuffer = new int[1];
+        GLFW.glfwGetWindowSize(this.windowID, windowXBuffer, windowYBuffer);
+        this.windowDimensions.set(windowXBuffer[0], windowYBuffer[0]);
+        System.out.println("Window size: " + this.windowDimensions.x + "x" + this.windowDimensions.y);
 
         GLFW.glfwMakeContextCurrent(this.windowID);
         GLFW.glfwSwapInterval(0);
         GLFW.glfwShowWindow(this.windowID);
         GLFW.glfwSetInputMode(this.windowID, GLFW.GLFW_CURSOR, GLFW.GLFW_CURSOR_HIDDEN);
+    }
+
+    public Vector2i getResolution() {
+        return this.windowDimensions;
     }
 
     public void setShouldClose() {

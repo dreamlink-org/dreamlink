@@ -1,4 +1,4 @@
-#version 450
+#version 410
 
 struct TextureMetaData {
     int texture_unit_id;
@@ -33,7 +33,7 @@ vec4 sample_from_offset(vec2 offset, int unit) {
         default:
             return vec4(1.0, 0.0, 0.0, 1.0);
     }
-};
+}
 
 void main() {
     opaque = sample_from_offset(vert_texture_offset, vert_texture_metadata.texture_unit_id);

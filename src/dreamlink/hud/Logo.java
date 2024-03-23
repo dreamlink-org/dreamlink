@@ -3,7 +3,6 @@ package dreamlink.hud;
 
 import org.joml.Vector2i;
 
-import dreamlink.Config;
 import dreamlink.gamestate.home.HomeExploreLogoGameState;
 import dreamlink.graphics.sprite.SpriteBatch;
 import dreamlink.graphics.sprite.SpriteHeight;
@@ -13,6 +12,7 @@ import dreamlink.logger.Logger;
 import dreamlink.simulation.Simulation;
 import dreamlink.utility.maths.Vector2iMaths;
 import dreamlink.utility.maths.Vector4fMaths;
+import dreamlink.window.Window;
 
 public class Logo implements IHUDComponent {
 
@@ -26,7 +26,7 @@ public class Logo implements IHUDComponent {
     private Vector2i position;
     
     public Logo() {
-        this.position = new Vector2i(Config.instance.resolution);
+        this.position = new Vector2i(Window.instance.getResolution());
         this.position.sub(EntityTextureSample.logo.dimensions);
         Vector2iMaths.div(this.position, 2);
     }
@@ -67,7 +67,7 @@ public class Logo implements IHUDComponent {
         SolidSpriteTemplate.white.writeToSpriteBatch(
             spriteBatch,
             Vector2iMaths.zero,
-            Config.instance.resolution,
+            Window.instance.getResolution(),
             SpriteHeight.background
         );
 

@@ -1,4 +1,4 @@
-#version 450
+#version 410
 
 struct TextureMetaData {
     int texture_unit_id;
@@ -27,7 +27,7 @@ TextureMetaData unpack_texture_metadata(int packed_data) {
     texture_metadata.animation_start_frame = (packed_data >> 20) & 0xFF;
     texture_metadata.animation_speed = 0x10 - (packed_data >> 28) & 0xF;
     return texture_metadata;
-};
+}
 
 vec4 unpack_color(int packed_color) {
     vec4 color_data;
