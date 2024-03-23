@@ -14,12 +14,7 @@ public class Config {
     private static int defaultLevelCacheSize = 16;
     private static int minimumLevelCacheSize = 16;
     private static float defaultMouseSensitivity = 40f;
-    private static Button defaultPlaceBlockButton = Button.mouseLeft;
-    private static Button defaultEraseBlockButton = Button.mouseRight;
-    private static Button defaultInteractButon = Button.keyE;
-    private static Button defaultEditButton = Button.keyTab;
     private static int defaultMaxAudioSources = 16;
-    private static Button defaultMainMenuButton = Button.keyEscape;
     private static String defaultNexusRoot = "https://dreamlink.tlonny.io/nexus";
 
     public static Config instance = new Config();
@@ -59,27 +54,6 @@ public class Config {
             Config.minimumLevelCacheSize
         );
 
-        this.mainMenuButton = Button.getButton(config.optString(
-            "input.button.main_menu", 
-            defaultMainMenuButton.name
-        ));
-
-        this.placeBlockButton = Button.getButton(config.optString(
-            "input.button.place_block", 
-            defaultPlaceBlockButton.name
-        ));
-        this.eraseBlockButton = Button.getButton(config.optString(
-            "input.button.erase_block", 
-            defaultEraseBlockButton.name
-        ));
-        this.interactButton = Button.getButton(config.optString(
-            "input.button.interact", 
-            defaultInteractButon.name
-        ));
-        this.editButton = Button.getButton(config.optString(
-            "input.button.edit", 
-            defaultEditButton.name
-        ));
         this.mouseSensitivity = config.optFloat(
             "input.mouse_sensitivity", 
             defaultMouseSensitivity
