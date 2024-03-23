@@ -11,8 +11,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.util.zip.GZIPInputStream;
-import java.util.zip.GZIPOutputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
@@ -80,13 +78,7 @@ public class FileFns {
 
     public static byte[] readBytesFromFile(File file) {
         try(var stream = new FileInputStream(file)) {
-            if(file.getName().endsWith(".gz")) {
-                try(var gzipStream = new GZIPInputStream(stream)) {
-                    return gzipStream.readAllBytes();
-                }
-            } else {
-                return stream.readAllBytes();
-            }
+            return stream.readAllBytes();
         } catch (IOException e ) {
             throw new RuntimeException(e);
         }
@@ -94,12 +86,6 @@ public class FileFns {
 
     public static void writeBytesToFile(File file, byte[] bytes) {
         try(var stream = new FileOutputStream(file)) {
-            if(file.getName().endsWith(".gz")) {
-                try(var gzipStream = new GZIPOutputStream(stream)) {
-                    gzipStream.write(bytes);
-                    return;
-                }
-            }
             stream.write(bytes);
         } catch (IOException e) {
             throw new RuntimeException(e);

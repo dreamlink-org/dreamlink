@@ -59,7 +59,7 @@ public class PrimitiveBlockMeshWriterStrategy {
                 localLight,
                 portalLight,
                 sample == null || block.isHidden(),
-                block.isAffectedByLight()
+                sample != null && block.isAffectedByLight()
             );
         }
     }

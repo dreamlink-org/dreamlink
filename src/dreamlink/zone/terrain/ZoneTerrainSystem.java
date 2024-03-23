@@ -9,8 +9,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.zip.GZIPInputStream;
-import java.util.zip.GZIPOutputStream;
 
 import org.joml.Vector3i;
 
@@ -26,7 +24,7 @@ import dreamlink.zone.terrain.light.TerrainLightResector;
 
 public class ZoneTerrainSystem {
 
-    private static Path terrainPath = Paths.get(".gen/chunks.dat.gz");
+    private static Path terrainPath = Paths.get(".gen/chunks.dat");
 
     private IZoneDirectory directory;
 
@@ -83,8 +81,7 @@ public class ZoneTerrainSystem {
         try(
             var fileInputStream = new FileInputStream(terrainFile);
             var bufferedInputStream = new BufferedInputStream(fileInputStream);
-            var gzipInputStream = new GZIPInputStream(bufferedInputStream);
-            var dataInputStream = new DataInputStream(gzipInputStream);
+            var dataInputStream = new DataInputStream(fileInputStream);
         ) {
             for(var ix = 0; ix < totalNumBlocks; ix += 1) {
                 var blockIndex = ix % blocksPerChunk;
@@ -129,8 +126,7 @@ public class ZoneTerrainSystem {
         try(
             var fileOutputStream = new FileOutputStream(terrainFile);
             var bufferedOutputStream = new BufferedOutputStream(fileOutputStream);
-            var gzipOutputStream = new GZIPOutputStream(bufferedOutputStream);
-            var dataOutputStream = new DataOutputStream(gzipOutputStream);
+            var dataOutputStream = new DataOutputStream(fileOutputStream);
         ) {
             for(var chunk : this.chunks) {
                 for(var ix = 0; ix < TerrainChunk.blockCount; ix += 1) {
