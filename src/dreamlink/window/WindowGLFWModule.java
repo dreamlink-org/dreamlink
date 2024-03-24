@@ -56,7 +56,6 @@ public class WindowGLFWModule {
         var windowYBuffer = new int[1];
         GLFW.glfwGetWindowSize(this.windowID, windowXBuffer, windowYBuffer);
         this.windowDimensions.set(windowXBuffer[0], windowYBuffer[0]);
-        System.out.println("Window size: " + this.windowDimensions.x + "x" + this.windowDimensions.y);
 
         GLFW.glfwMakeContextCurrent(this.windowID);
         GLFW.glfwSwapInterval(0);

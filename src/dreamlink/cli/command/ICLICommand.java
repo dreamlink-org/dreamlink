@@ -3,7 +3,7 @@ package dreamlink.cli.command;
 import net.sourceforge.argparse4j.inf.Namespace;
 import net.sourceforge.argparse4j.inf.Subparser;
 
-public interface ICommand {
+public interface ICLICommand {
 
     public String getCommandName();
 

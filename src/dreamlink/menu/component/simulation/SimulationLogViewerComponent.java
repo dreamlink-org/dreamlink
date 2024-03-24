@@ -2,6 +2,7 @@ package dreamlink.menu.component.simulation;
 
 import org.joml.Vector2i;
 
+import dreamlink.debug.DebugCommandRegistry;
 import dreamlink.gamestate.simulation.SimulationGameState;
 import dreamlink.gamestate.simulation.SimulationLogViewerMenuGameState;
 import dreamlink.graphics.sprite.SpriteBatch;
@@ -23,12 +24,35 @@ import dreamlink.menu.component.core.button.StaticButtonComponentProvider;
 import dreamlink.menu.component.core.span.SpanAlignment;
 import dreamlink.menu.component.core.span.SpanComponent;
 import dreamlink.menu.component.core.span.SpanOrientation;
+import dreamlink.menu.component.core.text.TextCharacterState;
+import dreamlink.menu.component.core.text.line.ITextLineComponentProvider;
+import dreamlink.menu.component.core.text.line.TextLineComponent;
 import dreamlink.menu.component.core.text.line.TextLineLabelComponent;
 import dreamlink.menu.component.core.window.WindowComponent;
 import dreamlink.simulation.Simulation;
 import dreamlink.utility.maths.Vector4fMaths;
+import dreamlink.window.Window;
+import dreamlink.window.button.Button;
 
 public class SimulationLogViewerComponent extends WrapperComponent {
+
+    private class InternalTextLineComponentProvider implements ITextLineComponentProvider {
+
+        @Override
+        public void setCharacterState(int characterIndex, TextCharacterState characterState) {
+            characterState.set(
+                SimulationLogViewerComponent.this.commandBuilder.charAt(characterIndex),
+                FontDecoration.normal,
+                Vector4fMaths.black
+            );
+        }
+
+        @Override
+        public int getCharacterCount() {
+            return SimulationLogViewerComponent.this.commandBuilder.length();
+        }
+        
+    }
 
     private static String windowTitle = "Log Viewer";
     private static Vector2i idealTextDimensions = new Vector2i(640, 480);
@@ -40,10 +64,12 @@ public class SimulationLogViewerComponent extends WrapperComponent {
 
     public static SimulationLogViewerComponent instance = new SimulationLogViewerComponent();
 
+    private StringBuilder commandBuilder;
     private BaseMenuComponent component;
     private LogViewerComponent logViewerComponent;
 
     public SimulationLogViewerComponent() {
+        this.commandBuilder = new StringBuilder();
         this.logViewerComponent = new LogViewerComponent(SimulationLogViewerComponent.logHistorySize);
         this.component = new WindowComponent(
             OverlayTextureSample.iconFolder,
@@ -59,7 +85,14 @@ public class SimulationLogViewerComponent extends WrapperComponent {
                                 BoxDimension.fixed(SimulationLogViewerComponent.idealTextDimensions.y)
                             )
                         )
-                    ).addComponent(
+                    )
+                    .addComponent(
+                        new DialogBorderComponent(
+                            new StaticDialogBorderComponentProvider(DialogState.focused),
+                            new TextLineComponent(new InternalTextLineComponentProvider())
+                        )
+                    )
+                    .addComponent(
                         new SpanComponent(SpanOrientation.horizontal, SpanAlignment.center, SimulationLogViewerComponent.itemSpacing)
                             .addComponent(
                                 new ButtonComponent(
@@ -79,6 +112,27 @@ public class SimulationLogViewerComponent extends WrapperComponent {
                 SimulationLogViewerComponent.itemSpacing
             )
         );
+    }
+
+    public void update() {
+        if(!this.isActive()) {
+            return;
+        }
+
+        for(var character : Window.instance.getCharacters()) {
+            this.commandBuilder.append(character);
+        }
+
+        if(Window.instance.isButtonPressed(Button.keyBackspace)) {
+            if(this.commandBuilder.length() > 0) {
+                this.commandBuilder.deleteCharAt(this.commandBuilder.length() - 1);
+            }
+        }
+
+        if(Window.instance.isButtonPressed(Button.keyEnter)) {
+            DebugCommandRegistry.instance.runCommand(this.commandBuilder.toString());
+            this.commandBuilder.setLength(0);
+        }
     }
 
     @Override

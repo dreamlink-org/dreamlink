@@ -16,6 +16,12 @@ public class Reticule implements IHUDComponent {
 
     public static Reticule instance = new Reticule();
 
+    public boolean showReticule;
+
+    public Reticule() {
+        this.showReticule = true;
+    }
+
     public void setup() {
         Logger.instance.debug("Setting up reticule HUD element");
         HUDSystem.instance.addHUDComponent(this);
@@ -24,7 +30,7 @@ public class Reticule implements IHUDComponent {
     @Override
     public void writeToSpriteBatch(SpriteBatch spriteBatch) {
         var gameState = Simulation.instance.getGameState();
-        if(gameState != SimulationGameState.instance) {
+        if(gameState != SimulationGameState.instance || !this.showReticule) {
             return;
         }
 

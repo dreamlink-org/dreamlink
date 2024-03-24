@@ -1,13 +1,14 @@
 package dreamlink.cli.command;
 
 import dreamlink.gamestate.home.HomeExploreLogoGameState;
+import dreamlink.player.Player;
 import dreamlink.simulation.Simulation;
 import dreamlink.simulation.SimulationMode;
 import dreamlink.zone.source.NexusZoneSourceStrategy;
 import net.sourceforge.argparse4j.inf.Namespace;
 import net.sourceforge.argparse4j.inf.Subparser;
 
-public class ExploreCommand implements ICommand {
+public class ExploreCommand implements ICLICommand {
 
     private static String commandName = "explore";
 
@@ -25,6 +26,7 @@ public class ExploreCommand implements ICommand {
         Simulation.instance.simulationMode = SimulationMode.explore;
         Simulation.instance.zoneSourceStrategy = NexusZoneSourceStrategy.instance;
         Simulation.instance.setGameState(HomeExploreLogoGameState.instance);
+        Player.instance.noClip = false;
 
         try {
             Simulation.instance.setup();

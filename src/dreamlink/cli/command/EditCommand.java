@@ -11,7 +11,7 @@ import dreamlink.zone.source.LocalZoneSourceStrategy;
 import net.sourceforge.argparse4j.inf.Namespace;
 import net.sourceforge.argparse4j.inf.Subparser;
 
-public class EditCommand implements ICommand {
+public class EditCommand implements ICLICommand {
 
     private static String commandName = "edit";
     private static String directoryArg = "directory";
@@ -34,6 +34,7 @@ public class EditCommand implements ICommand {
         Simulation.instance.zoneSourceStrategy = LocalZoneSourceStrategy.instance;
         Simulation.instance.simulationMode = SimulationMode.edit;
         Simulation.instance.setGameState(HomeLoadZoneGameState.instance);
+        Player.instance.noClip = true;
         Player.instance.setZone(ZoneCache.instance.getZone(zoneName));
 
         try {

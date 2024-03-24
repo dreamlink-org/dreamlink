@@ -5,5 +5,7 @@ import dreamlink.player.state.PlayerState;
 public interface IPlayerDirectory {
 
     public PlayerState getPlayerState();
+
+    public boolean isNoClip();
     
 }

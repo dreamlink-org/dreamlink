@@ -9,7 +9,7 @@ import dreamlink.zone.source.LocalZoneSourceStrategy;
 import net.sourceforge.argparse4j.inf.Namespace;
 import net.sourceforge.argparse4j.inf.Subparser;
 
-public class BuildCommand implements ICommand {
+public class BuildCommand implements ICLICommand {
 
     private static String commandName = "build";
     private static String directoryArg = "directory";

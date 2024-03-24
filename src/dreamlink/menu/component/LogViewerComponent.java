@@ -5,7 +5,7 @@ import java.util.List;
 
 import dreamlink.logger.LogMessage;
 import dreamlink.logger.Logger;
-import dreamlink.logger.simulation.SynchronizedLogRelay;
+import dreamlink.logger.SynchronizedLogRelay;
 import dreamlink.menu.component.core.BaseMenuComponent;
 import dreamlink.menu.component.core.WrapperComponent;
 import dreamlink.menu.component.core.text.TextCharacterState;

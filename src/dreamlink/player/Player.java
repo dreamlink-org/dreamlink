@@ -20,6 +20,11 @@ public class Player {
             return Player.this.state;
         }
 
+        @Override
+        public boolean isNoClip() {
+            return Player.this.noClip;
+        }
+
     }
 
     public static Player instance = new Player();
@@ -30,6 +35,8 @@ public class Player {
     private PlayerPositionIntegrator positionIntegrator;
     private PlayerInteractionSystem interactionSystem;
     private PlayerSwimChecker swimChecker;
+
+    public boolean noClip;
 
     public Player() {
         var directory = new InternalPlayerDirectory();

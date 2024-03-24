@@ -3,8 +3,6 @@ package dreamlink.player.velocity;
 import dreamlink.player.IPlayerDirectory;
 import dreamlink.player.velocity.strategy.FloatVelocityStrategy;
 import dreamlink.player.velocity.strategy.PlatformerVelocityStrategy;
-import dreamlink.simulation.Simulation;
-import dreamlink.simulation.SimulationMode;
 
 public class PlayerVelocityInputController {
 
@@ -68,7 +66,7 @@ public class PlayerVelocityInputController {
     }
 
     public void updateVelocity() {
-        if(Simulation.instance.simulationMode == SimulationMode.edit) {
+        if(this.directory.isNoClip()) {
             PlayerVelocityInputController.editStrategy.updateVelocity(this.directory);
             return;
         }

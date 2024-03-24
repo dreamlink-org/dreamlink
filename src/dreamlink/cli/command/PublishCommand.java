@@ -15,7 +15,7 @@ import dreamlink.zone.source.LocalZoneSourceStrategy;
 import net.sourceforge.argparse4j.inf.Namespace;
 import net.sourceforge.argparse4j.inf.Subparser;
 
-public class PublishCommand implements ICommand {
+public class PublishCommand implements ICLICommand {
 
     private static String commandName = "publish";
     private static String zoneNameKey = "meta.nexusid";

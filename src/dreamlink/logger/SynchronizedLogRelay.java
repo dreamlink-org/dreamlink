@@ -1,13 +1,9 @@
-package dreamlink.logger.simulation;
+package dreamlink.logger;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
-
-import dreamlink.logger.ILogListener;
-import dreamlink.logger.LogMessage;
-import dreamlink.logger.Logger;
 
 public class SynchronizedLogRelay implements ILogListener {
 

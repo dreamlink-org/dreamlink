@@ -32,7 +32,7 @@ import dreamlink.hud.HUDSystem;
 import dreamlink.hud.Logo;
 import dreamlink.hud.Reticule;
 import dreamlink.hud.ZoneBanner;
-import dreamlink.logger.simulation.SynchronizedLogRelay;
+import dreamlink.logger.SynchronizedLogRelay;
 import dreamlink.menu.MenuSystem;
 import dreamlink.menu.component.home.HomeEditLoadZoneComponent;
 import dreamlink.menu.component.home.HomeExploreComponent;
@@ -151,6 +151,7 @@ public class Simulation {
         ZoneCache.instance.update();
         Player.instance.update();
         HomeExploreComponent.instance.update();
+        SimulationLogViewerComponent.instance.update();
         QuickBarComponent.instance.update();
         SynchronizedLogRelay.instance.update();
 

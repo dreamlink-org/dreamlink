@@ -1,6 +1,7 @@
 package dreamlink.cli.command;
 
 import dreamlink.gamestate.home.HomeExploreLogoGameState;
+import dreamlink.player.Player;
 import dreamlink.simulation.Simulation;
 import dreamlink.simulation.SimulationMode;
 import dreamlink.utility.PathFns;
@@ -8,7 +9,7 @@ import dreamlink.zone.source.LocalMockNexusZoneSourceStrategy;
 import net.sourceforge.argparse4j.inf.Namespace;
 import net.sourceforge.argparse4j.inf.Subparser;
 
-public class ExploreLocalCommand implements ICommand {
+public class ExploreLocalCommand implements ICLICommand {
 
     private static String commandName = "explore:local";
     private static String rootArg = "root";
@@ -38,6 +39,7 @@ public class ExploreLocalCommand implements ICommand {
         Simulation.instance.simulationMode = SimulationMode.explore;
         Simulation.instance.zoneSourceStrategy = strategy;
         Simulation.instance.setGameState(HomeExploreLogoGameState.instance);
+        Player.instance.noClip = false;
 
         try {
             Simulation.instance.setup();
