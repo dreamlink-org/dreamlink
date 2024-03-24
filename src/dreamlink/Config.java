@@ -2,9 +2,8 @@ package dreamlink;
 
 import java.net.URI;
 
-import org.joml.Vector2i;
+import org.json.JSONObject;
 
-import dreamlink.window.button.Button;
 import dreamlink.utility.CommonPaths;
 import dreamlink.utility.FileFns;
 
@@ -19,14 +18,8 @@ public class Config {
 
     public static Config instance = new Config();
 
-    public Vector2i resolution;
     public int numThreads;
     public int levelCacheSize;
-    public Button placeBlockButton;
-    public Button eraseBlockButton;
-    public Button interactButton;
-    public Button editButton;
-    public Button mainMenuButton;
     public float mouseSensitivity;
     public boolean borderlessWindowedMode;
     public URI nexusRoot;
@@ -35,7 +28,9 @@ public class Config {
 
     public Config() {
         var configFile = CommonPaths.instance.configPath.resolve("config.json").toFile();
-        var config = FileFns.readJSONFromFile(configFile);
+        var config = configFile.exists()
+            ? FileFns.readJSONFromFile(configFile)
+            : new JSONObject();
 
         this.nexusRoot = URI.create(config.optString("nexus.root", Config.defaultNexusRoot));
         this.nexusDreamCode = config.optString("nexus.dreamcode").replace("-", "");

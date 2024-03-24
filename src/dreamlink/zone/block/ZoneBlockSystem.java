@@ -133,8 +133,7 @@ public class ZoneBlockSystem {
                 var textureSample = textureSystem.getTextureSample(textureName);
                 if(textureSample == null && textureName != null) {
                     var msg = String.format("Missing %s texture sample: %s", cubeFace.name, textureName);
-                    Logger.instance.warn(msg);
-                    continue;
+                    throw new ZoneLoadException(msg);
                 }
 
                 block.setTextureSample(cubeFace, textureSample);

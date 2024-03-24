@@ -247,7 +247,6 @@ public class Simulation {
 
     public void destroy() {
         WorkerPool.instance.destroy();
-        Window.instance.destroy();
     }
     
     public void run() {
