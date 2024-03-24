@@ -40,8 +40,8 @@ public class PrimitiveBlockMeshWriterStrategy {
 
             var remapped = orientation.remap(cubeFace);
             var mesh = block.isTransparent() ? chunk.transparentMesh : chunk.opaqueMesh;
-            var sample = block.getTextureSample(position, remapped);
-            sample = sample == null ? EntityTextureSample.missing : sample;
+            var originalSample = block.getTextureSample(position, remapped);
+            var sample = originalSample == null ? EntityTextureSample.missing : originalSample;
 
             var localLight = adjacentBlockData.localLight;
             var portalLight = adjacentBlockData.portalLight;
@@ -58,8 +58,8 @@ public class PrimitiveBlockMeshWriterStrategy {
                 sample,
                 localLight,
                 portalLight,
-                sample == null || block.isHidden(),
-                sample != null && block.isAffectedByLight()
+                originalSample == null || block.isHidden(),
+                originalSample != null && block.isAffectedByLight()
             );
         }
     }

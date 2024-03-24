@@ -259,7 +259,8 @@ public class Zone {
 
             try {
                 this.loadTask.join();
-                Logger.instance.debug("Zone successfully loaded.");
+                var msg = String.format("Zone loaded: %s", this.name);
+                Logger.instance.debug(msg);
             } catch (Exception e) {
                 this.zoneStatus = ZoneStatus.failed;
                 return;
@@ -271,7 +272,11 @@ public class Zone {
             this.zoneStatus = ZoneStatus.finalizing;
         } else {
             if(!this.terrainSystem.updateDirtyChunks()) {
-                this.zoneStatus = ZoneStatus.ready;
+                if(this.zoneStatus == ZoneStatus.finalizing) {
+                    var msg = String.format("Zone finalized: %s", this.name);
+                    Logger.instance.debug(msg);
+                    this.zoneStatus = ZoneStatus.ready;
+                }
             }
         }
     }
