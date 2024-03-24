@@ -15,7 +15,7 @@ public class Config {
     private static int minimumLevelCacheSize = 16;
     private static float defaultMouseSensitivity = 40f;
     private static int defaultMaxAudioSources = 16;
-    private static String defaultNexusRoot = "https://dreamlink.tlonny.io/nexus";
+    private static String defaultNexusRoot = "https://dreamlink.lonny.io/nexus";
 
     public static Config instance = new Config();
 

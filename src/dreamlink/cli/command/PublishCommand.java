@@ -22,6 +22,11 @@ public class PublishCommand implements ICLICommand {
     private static String directoryArg = "directory";
     private static String dreamCodeHeader = "X-Nexus-Auth";
 
+    private static int responseOK = 200;
+    private static int responseTooLarge = 413;
+    private static int responseInvalid = 400;
+    private static int responseUnauthorized = 401;
+
     @Override
     public void setupParser(Subparser subparser) {
         subparser.addArgument(PublishCommand.directoryArg)
@@ -65,14 +70,24 @@ public class PublishCommand implements ICLICommand {
                 }
 
                 var responseCode = connection.getResponseCode();
-                if(responseCode != 200) {
-                    throw new RuntimeException("Failed to publish zone");
+                if(responseCode == PublishCommand.responseOK) {
+                    Logger.instance.info("Zone published successfully");
+                } else if(responseCode == PublishCommand.responseTooLarge) {
+                    Logger.instance.error("Zone too large to publish");
+                } else if(responseCode == PublishCommand.responseInvalid) {
+                    Logger.instance.error("Zone invalid");
+                } else if(responseCode == PublishCommand.responseUnauthorized) {
+                    Logger.instance.error("Unauthorized to publish zone");
+                } else {
+                    System.out.println(responseCode);
+                    var msg = String.format("Failed to publish zone: %d", responseCode);
+                    throw new RuntimeException(msg);
                 }
             } finally {
                 tempFile.delete();
             }
         } catch (IOException e) {
-            Logger.instance.error(e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 
