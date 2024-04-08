@@ -22,6 +22,7 @@
         <profile>
             <id>macos-arm64</id>
             <properties>
+                <jvmArgs>-XstartOnFirstThread</jvmArgs>
                 <profile.id>macos-arm64</profile.id>
                 <lwjgl.classifier>natives-macos-arm64</lwjgl.classifier>
             </properties>
@@ -29,6 +30,7 @@
         <profile>
             <id>linux</id>
             <properties>
+                <jvmArgs></jvmArgs>
                 <profile.id>linux</profile.id>
                 <lwjgl.classifier>natives-linux</lwjgl.classifier>
             </properties>
@@ -36,6 +38,7 @@
         <profile>
             <id>windows</id>
             <properties>
+                <jvmArgs></jvmArgs>
                 <profile.id>windows</profile.id>
                 <lwjgl.classifier>natives-windows</lwjgl.classifier>
             </properties>
@@ -97,7 +100,7 @@
                 </executions>
                 <configuration>
                     <executable>java</executable>
-                    <commandlineArgs>-XstartOnFirstThread -classpath %classpath ${exec.mainClass} ${exec.args}</commandlineArgs>
+                    <commandlineArgs>${jvmArgs} -classpath %classpath ${exec.mainClass} ${exec.args}</commandlineArgs>
                 </configuration>
             </plugin>
         </plugins>

@@ -11,7 +11,7 @@ import dreamlink.zone.terrain.TerrainBlockData;
 
 public class PlayerSwimChecker {
 
-    private static float buoyancyFactor = 0.5f;
+    private static float buoyancyFactor = 0.75f;
 
     private IPlayerDirectory directory;
 
@@ -23,7 +23,7 @@ public class PlayerSwimChecker {
         var state = this.directory.getPlayerState();
         var collider = state.getCollider(new AABBf());
         var height = collider.maxY - collider.minY;
-        collider.maxY -= (1f - PlayerSwimChecker.buoyancyFactor) * height;
+        collider.minY += (1f - PlayerSwimChecker.buoyancyFactor) * height;
 
         var collisionRange = AABBiMaths.expandFrom(new AABBi(), collider);
         var blockPosition = new Vector3i();

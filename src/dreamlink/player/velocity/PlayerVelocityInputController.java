@@ -19,7 +19,6 @@ public class PlayerVelocityInputController {
 
     private static float swimMaxSpeed = 3.5f;
     private static float swimMaxCrouchSpeed = 2f;
-    private static float swimMaxSprintSpeed = 5f;
     private static float swimAcceleration = 1f;
     private static float swimFriction = 0.3f;
 
@@ -46,7 +45,7 @@ public class PlayerVelocityInputController {
     private static FloatVelocityStrategy swimStrategy = new FloatVelocityStrategy(
         PlayerVelocityInputController.swimMaxSpeed,
         PlayerVelocityInputController.swimMaxCrouchSpeed,
-        PlayerVelocityInputController.swimMaxSprintSpeed,
+        PlayerVelocityInputController.swimMaxSpeed,
         PlayerVelocityInputController.swimAcceleration,
         PlayerVelocityInputController.swimFriction
     );

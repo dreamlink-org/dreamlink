@@ -16,6 +16,28 @@ public class Vector3iMaths {
         return a.x * b.x + a.y * b.y + a.z * b.z;
     }
 
+    public static int getAxisValue(Vector3i vector, int axis) {
+        if(axis == 0) {
+            return vector.x;
+        } else if(axis == 1) {
+            return vector.y;
+        } else if(axis == 2) {
+            return vector.z;
+        } else {
+            return 0;
+        }
+    }
+
+    public static void setAxisValue(Vector3i vector, int axis, int value) {
+        if(axis == 0) {
+            vector.x = value;
+        } else if(axis == 1) {
+            vector.y = value;
+        } else if(axis == 2) {
+            vector.z = value;
+        }
+    }
+
     public static Vector3i div(Vector3i target, Vector3i divisor) {
         return target.set(
             target.x / divisor.x,

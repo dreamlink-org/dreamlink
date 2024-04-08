@@ -91,7 +91,7 @@ public class PlayerInteractionSystem {
     private static int numIterations = 50;
 
     private static IInteractionStrategy[] strategies = new IInteractionStrategy[] {
-        EditBlockStrategy.instance,
+        new EditBlockStrategy(),
         DoorStrategy.instance,
         ReadBlockStrategy.instance
     };
@@ -152,6 +152,7 @@ public class PlayerInteractionSystem {
                     rayData.rayCubeFace, 
                     block
                 );
+                break;
             }
         }
         

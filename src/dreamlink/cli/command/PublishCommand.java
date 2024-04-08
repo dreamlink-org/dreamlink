@@ -37,21 +37,22 @@ public class PublishCommand implements ICLICommand {
     @Override
     public void run(Namespace namespace) {
         var directoryPath = FileFns.sanitizeUserPath(namespace.getString(PublishCommand.directoryArg));
+
         try {
             var tempFile = File.createTempFile("zone", ".zip");
             try {
-                var zoneConfigPath = directoryPath.resolve("zone.json");
-                var zoneConfig = FileFns.readJSONFromFile(zoneConfigPath.toFile());
-                var uploadPath = Paths.get(Config.instance.nexusRoot.getPath(), zoneConfig.getString(PublishCommand.zoneNameKey)).toString();
-                var uploadURI = Config.instance.nexusRoot.resolve(uploadPath);
-                var uploadURL = uploadURI.toURL();
-
                 // Load the zone data - this will run all the standard zone validation checks
                 // and ensure that the zone is in a valid state before publishing...
                 Logger.instance.info(String.format("Loading zone (for validation): %s", directoryPath));
                 Simulation.instance.simulationMode = SimulationMode.edit;
                 Simulation.instance.zoneSourceStrategy = LocalZoneSourceStrategy.instance;
                 ZoneCache.instance.getZone(directoryPath.toString()).loadData();
+
+                var zoneConfigPath = directoryPath.resolve("zone.json");
+                var zoneConfig = FileFns.readJSONFromFile(zoneConfigPath.toFile());
+                var uploadPath = Paths.get(Config.instance.nexusRoot.getPath(), zoneConfig.getString(PublishCommand.zoneNameKey)).toString();
+                var uploadURI = Config.instance.nexusRoot.resolve(uploadPath);
+                var uploadURL = uploadURI.toURL();
 
                 Logger.instance.info("Building zone");
                 FileFns.compressIntoZip(directoryPath.toFile(), tempFile);

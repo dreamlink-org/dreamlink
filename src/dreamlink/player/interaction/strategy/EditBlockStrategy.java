@@ -10,6 +10,7 @@ import dreamlink.utility.maths.CubeFace;
 import dreamlink.utility.maths.Orientation;
 import dreamlink.window.Window;
 import dreamlink.window.button.Button;
+import dreamlink.zone.block.AirBlock;
 import dreamlink.zone.block.BarrierBlock;
 import dreamlink.zone.block.DoorBlock;
 import dreamlink.zone.block.IBlock;
@@ -19,7 +20,15 @@ import dreamlink.zone.terrain.TerrainBlockData;
 
 public class EditBlockStrategy implements IInteractionStrategy {
 
-    public static EditBlockStrategy instance = new EditBlockStrategy();
+    private static long applyPeriod = 100;
+    private static long initialApplyPeriod = 1_000;
+
+    private long nextApplyTime;
+    private Vector3i lastApplyPosition;
+
+    public EditBlockStrategy() {
+        this.lastApplyPosition = new Vector3i();
+    }
 
     @Override
     public boolean canInteract(
@@ -39,12 +48,30 @@ public class EditBlockStrategy implements IInteractionStrategy {
     ) {
         var playerState = playerDirectory.getPlayerState();
         var orientation = Orientation.fromYaw(playerState.rotation.y).getOpposite();
-        if(Window.instance.isButtonPressed(Button.mouseLeft)) {
+
+        if(Window.instance.isButtonDown(Button.mouseLeft)) {
             var selectedStamp = QuickBarComponent.instance.getSelectedStamp();
-            if(selectedStamp != null) {
-                var applyPosition = new Vector3i(blockPosition).add(rayCubeFace.normal);
-                selectedStamp.applyStamp(applyPosition, orientation);
+            var applyTime = System.currentTimeMillis();
+            var applyPosition = new Vector3i(blockPosition).add(rayCubeFace.normal);
+            var applyBlockID = playerState.zone.getBlockData(
+                applyPosition, new TerrainBlockData()
+            ).blockID;
+
+            var isSameBlock = this.lastApplyPosition.equals(blockPosition);
+            var unableToApply = isSameBlock && applyTime < this.nextApplyTime;
+            if(unableToApply || selectedStamp == null || applyBlockID != AirBlock.blockID) {
+                return;
             }
+
+            selectedStamp.applyStamp(applyPosition, orientation);
+            this.lastApplyPosition.set(applyPosition);
+
+            var applyPeriod = Window.instance.isButtonPressed(Button.mouseLeft) || !isSameBlock 
+                ? EditBlockStrategy.initialApplyPeriod
+                : EditBlockStrategy.applyPeriod;
+
+            this.nextApplyTime = applyTime + applyPeriod;
+            
         } else if(Window.instance.isButtonPressed(Button.mouseRight)) {
             if(block instanceof BarrierBlock) {
                 return;
