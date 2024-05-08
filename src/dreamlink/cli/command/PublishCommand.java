@@ -20,7 +20,7 @@ public class PublishCommand implements ICLICommand {
     private static String commandName = "publish";
     private static String zoneNameKey = "meta.nexusid";
     private static String directoryArg = "directory";
-    private static String dreamCodeHeader = "X-Nexus-Auth";
+    private static String dreamCodeHeader = "X-Dream-Code";
 
     private static int responseOK = 200;
     private static int responseTooLarge = 413;
@@ -50,7 +50,7 @@ public class PublishCommand implements ICLICommand {
 
                 var zoneConfigPath = directoryPath.resolve("zone.json");
                 var zoneConfig = FileFns.readJSONFromFile(zoneConfigPath.toFile());
-                var uploadPath = Paths.get(Config.instance.nexusRoot.getPath(), zoneConfig.getString(PublishCommand.zoneNameKey)).toString();
+                var uploadPath = Paths.get("/zone", zoneConfig.getString(PublishCommand.zoneNameKey)).toString();
                 var uploadURI = Config.instance.nexusRoot.resolve(uploadPath);
                 var uploadURL = uploadURI.toURL();
 
@@ -62,7 +62,7 @@ public class PublishCommand implements ICLICommand {
                 Logger.instance.info("Uploading zone");
                 var connection = (HttpURLConnection)uploadURL.openConnection();
                 connection.setDoOutput(true);
-                connection.setRequestMethod("POST");
+                connection.setRequestMethod("PUT");
                 connection.setRequestProperty("Content-Type", "application/zip");
                 connection.setRequestProperty(PublishCommand.dreamCodeHeader, Config.instance.nexusDreamCode);
 

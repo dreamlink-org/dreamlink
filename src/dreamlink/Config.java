@@ -14,7 +14,7 @@ public class Config {
     private static int minimumLevelCacheSize = 16;
     private static float defaultMouseSensitivity = 40f;
     private static int defaultMaxAudioSources = 16;
-    private static String defaultNexusRoot = "https://dreamlink.lonny.io/nexus";
+    private static String defaultNexusRoot = "https://api.dreamlink.lonny.io/nexus";
 
     public static Config instance = new Config();
 
@@ -33,7 +33,7 @@ public class Config {
             : new JSONObject();
 
         this.nexusRoot = URI.create(config.optString("nexus.root", Config.defaultNexusRoot));
-        this.nexusDreamCode = config.optString("nexus.dreamcode").replace("-", "");
+        this.nexusDreamCode = config.optString("nexus.dreamCode").replace("-", "");
         this.borderlessWindowedMode = config.optBoolean("display.borderless_windowed_mode", false);
 
         this.numThreads = config.optInt(
